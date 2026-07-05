@@ -6,6 +6,7 @@ import Image from "next/image";
 import { detectRenderTier, type RenderTier } from "@/lib/device";
 import { BRANCHES } from "@/lib/branches";
 import { SITE_NAME } from "@/lib/site";
+import { PetalGridCss } from "@/components/fallback/PetalGridCss";
 import { useScrollStore } from "./scrollStore";
 import { ScrollDriver } from "./ScrollDriver";
 
@@ -49,9 +50,7 @@ export function ConvergenceHero() {
   }
 
   if (tier === "css") {
-    // CSS fallback tier — petal-to-grid handled by PetalGridCss (Task 11);
-    // until then the poster stays as the visual.
-    return <div className="flex h-full items-center justify-center">{POSTER}</div>;
+    return <PetalGridCss />;
   }
 
   const teaser = hovered ? BRANCHES.find((b) => b.branch === hovered) : null;
