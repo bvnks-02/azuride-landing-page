@@ -1,4 +1,5 @@
 import { HeroSection } from "@/components/home/HeroSection";
+import { ConvergenceHero } from "@/components/three/ConvergenceHero";
 import { TwinUpSection } from "@/components/home/TwinUpSection";
 import { IndustriesSection } from "@/components/home/IndustriesSection";
 import { ClosingCta } from "@/components/home/ClosingCta";
@@ -9,7 +10,7 @@ import { SharpAccent } from "@/components/ui/SharpAccent";
 export default function Home() {
   return (
     <>
-      <HeroSection />
+      <HeroSection heroSlot={<ConvergenceHero />} />
 
       <section className="border-y border-hairline">
         <div className="mx-auto max-w-[1200px] px-6 py-16 lg:px-16">
