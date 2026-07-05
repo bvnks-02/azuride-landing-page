@@ -6,8 +6,8 @@ import Image from "next/image";
 import { detectRenderTier, type RenderTier } from "@/lib/device";
 import { BRANCHES } from "@/lib/branches";
 import { SITE_NAME } from "@/lib/site";
-import { StaticPetalGrid } from "@/components/fallback/StaticPetalGrid";
 import { useScrollStore } from "./scrollStore";
+import { ScrollDriver } from "./ScrollDriver";
 
 const ConvergenceCanvas = dynamic(() => import("./ConvergenceCanvas"), {
   ssr: false,
@@ -59,6 +59,7 @@ export function ConvergenceHero() {
 
   return (
     <div className="relative h-full w-full" data-convergence-canvas>
+      <ScrollDriver targetId="hero" />
       <div className="absolute inset-0" aria-hidden>
         <ConvergenceCanvas onDegrade={handleDegrade} enableBloom={enableBloom} />
       </div>

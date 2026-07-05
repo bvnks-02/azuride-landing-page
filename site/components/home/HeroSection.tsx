@@ -8,7 +8,10 @@ import { SITE_MOTTO, SITE_NAME } from "@/lib/site";
  */
 export function HeroSection({ heroSlot }: { heroSlot?: React.ReactNode }) {
   return (
-    <section className="mx-auto flex min-h-[calc(100vh-4rem)] max-w-[1200px] flex-col items-center justify-center px-6 py-16 text-center lg:px-16">
+    <section
+      id="hero"
+      className="mx-auto flex min-h-[calc(100vh-4rem)] max-w-[1200px] flex-col items-center justify-center bg-white px-6 py-16 text-center lg:px-16"
+    >
       <div className="relative flex h-[44vh] min-h-[280px] w-full items-center justify-center">
         {heroSlot ?? (
           <Image
