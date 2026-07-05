@@ -1,0 +1,38 @@
+import type { Metadata } from "next";
+import { Inter, Space_Grotesk } from "next/font/google";
+import "./globals.css";
+
+const displayFont = Space_Grotesk({
+  subsets: ["latin"],
+  weight: ["500", "700"],
+  variable: "--font-display",
+});
+
+const bodyFont = Inter({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  variable: "--font-body",
+});
+
+export const metadata: Metadata = {
+  title: "AZURID — Capturing Reality. Building Digital Intelligence.",
+  description:
+    "One technology ecosystem, four branches: reality capture, visual production, software engineering, and healthcare innovation.",
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html
+      lang="en"
+      className={`${displayFont.variable} ${bodyFont.variable} h-full antialiased`}
+    >
+      <body className="min-h-full flex flex-col bg-white font-body text-ink">
+        {children}
+      </body>
+    </html>
+  );
+}
