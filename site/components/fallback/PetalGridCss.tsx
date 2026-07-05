@@ -60,12 +60,8 @@ export function PetalGridCss() {
 
   return (
     <div ref={ref} className="flex h-full w-full items-center justify-center">
-      <svg
-        viewBox={`0 0 ${SIZE} ${SIZE}`}
-        className="h-full w-auto overflow-visible"
-        role="img"
-        aria-label="AZURID mark — four branch petals around an emerald core"
-      >
+      {/* No role="img" — the four petal links inside must stay exposed to AT */}
+      <svg viewBox={`0 0 ${SIZE} ${SIZE}`} className="h-full w-auto overflow-visible">
         <defs>
           <linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0%" stopColor="var(--color-cerulean)" />

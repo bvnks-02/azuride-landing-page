@@ -31,9 +31,10 @@ export function BranchCard({ branch, title, teaser, href }: BranchInfo) {
       <p className="mt-2 text-sm leading-relaxed text-slate">{teaser}</p>
       <Link
         href={href}
-        className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-accent transition-all duration-[250ms] hover:gap-2.5"
+        className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-ink transition-all duration-[250ms] hover:gap-2.5"
       >
-        Explore <ArrowRight aria-hidden className="size-4" strokeWidth={1.5} />
+        Explore{" "}
+        <ArrowRight aria-hidden className="size-4 text-accent" strokeWidth={1.5} />
         <span className="sr-only">{title}</span>
       </Link>
     </motion.div>

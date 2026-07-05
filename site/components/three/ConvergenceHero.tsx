@@ -69,7 +69,10 @@ export function ConvergenceHero() {
           style={{ left: teaserPos.x, top: Math.max(teaserPos.y - 64, 0) }}
           role="status"
         >
-          <p className="text-eyebrow text-accent">{teaser.title}</p>
+          <p className="flex items-center gap-2 text-eyebrow text-ink">
+            <span aria-hidden className="inline-block size-2 rotate-45 bg-accent" />
+            {teaser.title}
+          </p>
           <p className="mt-1 text-sm text-slate">{teaser.teaser}</p>
         </div>
       )}
