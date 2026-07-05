@@ -1,26 +1,119 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/*
+ * AZURID design tokens — single source of truth (design.md §2–§4).
+ * The default Tailwind palette is disabled: only the four sampled brand
+ * hues + neutrals exist, so off-brand colors can't be typed by accident.
+ */
+@theme {
+  --color-*: initial;
+
+  /* Brand (sampled from logo) */
+  --color-emerald: #14b88b;
+  --color-cerulean: #008fc3;
+  --color-harbor: #0075a1;
+  --color-navy: #004869;
+
+  /* Neutrals */
+  --color-ink: #0a1e2b;
+  --color-slate: #5b6b75;
+  --color-hairline: #e2e8ec;
+  --color-surface-alt: #f5f8fa;
+  --color-white: #ffffff;
+
+  /* Radii */
+  --radius-card: 16px;
+  --radius-input: 12px;
+  --radius-pill: 999px;
 }
 
+/* Dynamic tokens — resolved at use time so data-branch can override */
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-accent: var(--accent);
+  --color-accent-contrast: var(--accent-contrast);
+  --font-display: var(--font-space-grotesk);
+  --font-body: var(--font-inter);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  /* Named gradients (design.md §2.2) */
+  --gradient-capture: linear-gradient(
+    135deg,
+    var(--color-cerulean),
+    var(--color-navy)
+  );
+  --gradient-intelligence: radial-gradient(
+    circle,
+    var(--color-emerald),
+    var(--color-navy)
+  );
+
+  /* Motion timing */
+  --ease-out-brand: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-hover: 250ms;
+  --duration-reveal: 600ms;
+
+  /* Branch accent — overridden via data-branch below.
+     Contrast pairings follow design.md §2.5: white on navy/harbor,
+     ink on cerulean/emerald. */
+  --accent: var(--color-navy);
+  --accent-contrast: var(--color-white);
+}
+
+[data-branch="construction"] {
+  --accent: var(--color-navy);
+  --accent-contrast: var(--color-white);
+}
+[data-branch="communication"] {
+  --accent: var(--color-harbor);
+  --accent-contrast: var(--color-white);
+}
+[data-branch="tech"] {
+  --accent: var(--color-cerulean);
+  --accent-contrast: var(--color-ink);
+}
+[data-branch="healthcare"] {
+  --accent: var(--color-emerald);
+  --accent-contrast: var(--color-ink);
+}
+
+/* Type scale (design.md §3), fluid between mobile and desktop sizes */
+@utility text-h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(36px, 5vw, 64px);
+  line-height: 1.05;
+}
+@utility text-h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(28px, 3.2vw, 40px);
+  line-height: 1.1;
+}
+@utility text-h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(20px, 1.8vw, 24px);
+  line-height: 1.2;
+}
+@utility text-body-lg {
+  font-size: clamp(16px, 1.3vw, 18px);
+  line-height: 1.6;
+}
+@utility text-eyebrow {
+  font-size: 13px;
+  line-height: 1;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+@utility bg-gradient-capture {
+  background-image: var(--gradient-capture);
+}
+@utility bg-gradient-intelligence {
+  background-image: var(--gradient-intelligence);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
 }
