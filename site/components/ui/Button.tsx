@@ -9,8 +9,11 @@ const MotionLink = motion.create(Link);
 type ButtonProps = {
   href: string;
   children: React.ReactNode;
-  /** primary = Harbor fill + white text (nav/global CTA); accent = branch accent fill */
-  variant?: "primary" | "accent";
+  /**
+   * primary = Harbor fill + white text (nav/global CTA); accent = branch
+   * accent fill; inverse = white fill + navy text, for dark gradient panels.
+   */
+  variant?: "primary" | "accent" | "inverse";
   className?: string;
 };
 
@@ -21,6 +24,7 @@ const base =
 const variants = {
   primary: "bg-harbor text-white",
   accent: "bg-accent text-accent-contrast",
+  inverse: "bg-white text-navy",
 };
 
 export function Button({
