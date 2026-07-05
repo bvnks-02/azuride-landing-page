@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
+import { Providers } from "@/components/ui/Providers";
+import { NavBar } from "@/components/ui/NavBar";
+import { Footer } from "@/components/ui/Footer";
 
 const displayFont = Space_Grotesk({
   subsets: ["latin"],
@@ -31,7 +34,11 @@ export default function RootLayout({
       className={`${displayFont.variable} ${bodyFont.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-white font-body text-ink">
-        {children}
+        <Providers>
+          <NavBar />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </Providers>
       </body>
     </html>
   );
