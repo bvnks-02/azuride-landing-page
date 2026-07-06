@@ -35,11 +35,17 @@ Reconcile every string against the profile before deploy.
 ## 4. 3D bundle budget contradiction (spec §4.3 vs §2)
 
 The spec caps the 3D chunk at 180 KB gz but also mandates React Three Fiber.
-`three` + `fiber` + `react-reconciler` floor is ~234 KB gz, which is what
-ships after removing postprocessing and drei. Either accept the overage
-(current state — the chunk is lazy, behind a poster, and never fetched by
-mobile/css/static tiers) or drop to raw `three` without R3F to get under
-180 KB, at the cost of rewriting `components/three/`.
+Measured lazy 3D chunk: **~191 KB gzipped** (720 KB raw). This is the floor
+imposed by the stack choice: `three` (~165 KB gz) + `@react-three/fiber` +
+`react-reconciler` (~70 KB gz), minus what the `three`→`lib/three-slim.ts`
+alias already trims. Named imports and the curated alias are already applied;
+removing fiber's dead-code-only symbol references (shadow-map types,
+OrthographicCamera) from `three-slim.ts` fails the Turbopack build because
+fiber does `import * as THREE` and every `THREE.X` must resolve at module
+resolution time. Either accept the ~11 KB overage (current state — the chunk
+is lazy, behind a poster, and never fetched by mobile/css/static tiers) or
+drop to raw `three` without R3F to get under 180 KB, at the cost of
+rewriting `components/three/`.
 
 ## 5. Real photography and final poster
 

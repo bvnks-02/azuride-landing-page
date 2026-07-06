@@ -16,7 +16,7 @@ export function TwinUpSection() {
           </p>
           <div className="mt-8">
             <Button href="/construction-inspection" variant="inverse">
-              See how it works
+              Explore Construction &amp; Inspection
             </Button>
           </div>
         </Reveal>

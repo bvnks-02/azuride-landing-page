@@ -1,8 +1,9 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState, useSyncExternalStore } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { detectRenderTier, type RenderTier } from "@/lib/device";
 import { BRANCHES } from "@/lib/branches";
 import { SITE_NAME } from "@/lib/site";
@@ -25,6 +26,15 @@ const POSTER = (
   />
 );
 
+// One-shot client capability read via useSyncExternalStore: the server
+// snapshot is "static" (poster first paint), the client snapshot is detected
+// once and cached. Capabilities never change mid-session, so subscribe is a
+// no-op; the FPS-probe degrade path is separate state below.
+let detectedTier: RenderTier | null = null;
+const subscribeNoop = () => () => {};
+const getClientTier = () => (detectedTier ??= detectRenderTier());
+const getServerTier = (): RenderTier => "static";
+
 /**
  * Tier switch for the Convergence Reveal (build spec §4.4):
  *   full3d — R3F canvas, scroll-scrubbed
@@ -33,19 +43,17 @@ const POSTER = (
  * All tiers land on the same four branch cards below the hero.
  */
 export function ConvergenceHero() {
-  const [tier, setTier] = useState<RenderTier>("static");
-  const [ready, setReady] = useState(false);
+  const detected = useSyncExternalStore(subscribeNoop, getClientTier, getServerTier);
+  const [degraded, setDegraded] = useState(false);
+  const tier: RenderTier = degraded && detected === "full3d" ? "css" : detected;
   const hovered = useScrollStore((s) => s.hovered);
   const teaserPos = useScrollStore((s) => s.teaserPos);
+  const router = useRouter();
 
-  useEffect(() => {
-    setTier(detectRenderTier());
-    setReady(true);
-  }, []);
+  const handleDegrade = useCallback(() => setDegraded(true), []);
+  const navigate = useCallback((href: string) => router.push(href), [router]);
 
-  const handleDegrade = useCallback(() => setTier("css"), []);
-
-  if (!ready || tier === "static") {
+  if (tier === "static") {
     return <div className="flex h-full items-center justify-center">{POSTER}</div>;
   }
 
@@ -59,7 +67,7 @@ export function ConvergenceHero() {
     <div className="relative h-full w-full" data-convergence-canvas>
       <ScrollDriver targetId="hero" />
       <div className="absolute inset-0" aria-hidden>
-        <ConvergenceCanvas onDegrade={handleDegrade} />
+        <ConvergenceCanvas onDegrade={handleDegrade} navigate={navigate} />
       </div>
       {teaser && teaserPos && (
         <div

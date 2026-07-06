@@ -1,12 +1,20 @@
 import { Reveal } from "@/components/ui/Reveal";
 
 const INDUSTRIES = [
-  "Construction & Engineering",
-  "Energy",
+  "Construction",
+  "Engineering",
+  "Architecture",
+  "Infrastructure",
   "Healthcare",
-  "Government & Public Sector",
-  "Media & Events",
+  "Public Institutions",
   "Education",
+  "Industry",
+  "Energy",
+  "Real Estate",
+  "Government",
+  "Scientific Organizations",
+  "Retail & E-commerce",
+  "Startups & Digital Businesses",
 ];
 
 export function IndustriesSection() {

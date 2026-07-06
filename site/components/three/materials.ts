@@ -1,4 +1,5 @@
-import * as THREE from "three";
+// Named imports only — `import * as THREE` defeats tree-shaking (§4.3 budget).
+import { Color, ExtrudeGeometry, ShaderMaterial, Shape } from "three";
 import { TOKENS } from "@/lib/tokens";
 
 /**
@@ -9,11 +10,11 @@ import { TOKENS } from "@/lib/tokens";
 
 /** Ring: cerulean at the outer rim -> ink navy toward the hole. */
 export function createRingMaterial(majorRadius: number, tubeRadius: number) {
-  return new THREE.ShaderMaterial({
+  return new ShaderMaterial({
     transparent: true,
     uniforms: {
-      uOuter: { value: new THREE.Color(TOKENS.cerulean) },
-      uInner: { value: new THREE.Color(TOKENS.navy) },
+      uOuter: { value: new Color(TOKENS.cerulean) },
+      uInner: { value: new Color(TOKENS.navy) },
       uMin: { value: majorRadius - tubeRadius },
       uMax: { value: majorRadius + tubeRadius },
       uOpacity: { value: 1 },
@@ -45,11 +46,11 @@ export function createRingMaterial(majorRadius: number, tubeRadius: number) {
 /** Diamond core: navy at the points -> emerald center, with an emissive
  *  emerald term so it reads as glowing even without bloom. */
 export function createCoreMaterial(radius: number) {
-  return new THREE.ShaderMaterial({
+  return new ShaderMaterial({
     transparent: true,
     uniforms: {
-      uEdge: { value: new THREE.Color(TOKENS.navy) },
-      uCenter: { value: new THREE.Color(TOKENS.emerald) },
+      uEdge: { value: new Color(TOKENS.navy) },
+      uCenter: { value: new Color(TOKENS.emerald) },
       uRadius: { value: radius },
       uEmissive: { value: 0.3 },
       uOpacity: { value: 1 },
@@ -86,14 +87,14 @@ export function createCoreMaterial(radius: number) {
  *  quadratic curves, extruded thin. Local origin sits at the inner tip so
  *  rotation/translation along the petal's own axis reads as unfolding. */
 export function createPetalGeometry() {
-  const shape = new THREE.Shape();
+  const shape = new Shape();
   const length = 1.5;
   const halfWidth = 0.78;
   shape.moveTo(0, 0);
   shape.quadraticCurveTo(halfWidth, length * 0.42, 0, length);
   shape.quadraticCurveTo(-halfWidth, length * 0.42, 0, 0);
 
-  const geometry = new THREE.ExtrudeGeometry(shape, {
+  const geometry = new ExtrudeGeometry(shape, {
     depth: 0.05,
     bevelEnabled: true,
     bevelThickness: 0.02,
