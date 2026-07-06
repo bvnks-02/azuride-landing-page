@@ -5,15 +5,11 @@ import { ConvergenceScene } from "./ConvergenceScene";
 
 type ConvergenceCanvasProps = {
   onDegrade: () => void;
-  enableBloom: boolean;
 };
 
 /** The lazy-loaded WebGL entry point — nothing outside components/three
  *  imports three (build spec §6 bundle boundary). */
-export default function ConvergenceCanvas({
-  onDegrade,
-  enableBloom,
-}: ConvergenceCanvasProps) {
+export default function ConvergenceCanvas({ onDegrade }: ConvergenceCanvasProps) {
   return (
     <Canvas
       camera={{ position: [0, 0, 5.4], fov: 42 }}
@@ -23,7 +19,7 @@ export default function ConvergenceCanvas({
       tabIndex={-1}
       className="!pointer-events-auto"
     >
-      <ConvergenceScene onDegrade={onDegrade} enableBloom={enableBloom} />
+      <ConvergenceScene onDegrade={onDegrade} />
     </Canvas>
   );
 }

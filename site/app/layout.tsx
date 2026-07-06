@@ -18,7 +18,7 @@ const bodyFont = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "AZURID — Capturing Reality. Building Digital Intelligence.",
+  title: "AZURID | Capturing Reality. Building Digital Intelligence.",
   description:
     "One technology ecosystem, four branches: reality capture, visual production, software engineering, and healthcare innovation.",
 };

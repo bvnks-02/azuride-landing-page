@@ -3,7 +3,7 @@ import { TechSubpageShell } from "@/components/tech/TechSubpageShell";
 import { SITE_NAME } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: `Web Development — ${SITE_NAME}`,
+  title: `Web Development | ${SITE_NAME}`,
   description: "Landing pages, corporate websites, and e-commerce platforms.",
 };
 

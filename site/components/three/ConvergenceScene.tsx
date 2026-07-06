@@ -2,7 +2,6 @@
 
 import { useEffect, useMemo, useRef } from "react";
 import { useFrame } from "@react-three/fiber";
-import { EffectComposer, SelectiveBloom } from "@react-three/postprocessing";
 import * as THREE from "three";
 import { TOKENS } from "@/lib/tokens";
 import { BRANCHES } from "@/lib/branches";
@@ -18,11 +17,14 @@ const PARTICLE_COUNT = 220;
 type ConvergenceSceneProps = {
   /** Called once if the runtime FPS probe fails — parent drops to CSS tier. */
   onDegrade: () => void;
-  /** Bloom is skipped entirely on weaker machines (build spec §4.3). */
-  enableBloom: boolean;
 };
 
-export function ConvergenceScene({ onDegrade, enableBloom }: ConvergenceSceneProps) {
+/**
+ * The emerald glow is done entirely in the core shader's emissive term —
+ * a postprocessing bloom pass would cost ~150KB gz against the §4.3
+ * 180KB budget for a subtle gain.
+ */
+export function ConvergenceScene({ onDegrade }: ConvergenceSceneProps) {
   const coreRef = useRef<THREE.Mesh>(null!);
   const ringRef = useRef<THREE.Mesh>(null!);
   const particlesRef = useRef<THREE.Points>(null!);
@@ -124,19 +126,6 @@ export function ConvergenceScene({ onDegrade, enableBloom }: ConvergenceScenePro
       {BRANCHES.map((b, i) => (
         <PetalMesh key={b.branch} branch={b.branch} index={i} />
       ))}
-
-      {enableBloom && (
-        <EffectComposer>
-          <SelectiveBloom
-            lights={[lightRef]}
-            selection={coreRef}
-            intensity={0.9}
-            luminanceThreshold={0.2}
-            luminanceSmoothing={0.3}
-            mipmapBlur
-          />
-        </EffectComposer>
-      )}
     </>
   );
 }

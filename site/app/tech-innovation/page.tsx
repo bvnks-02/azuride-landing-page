@@ -4,7 +4,7 @@ import { SubGrid } from "@/components/tech/SubGrid";
 import { SITE_NAME } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: `Tech & Innovation — ${SITE_NAME}`,
+  title: `Tech & Innovation | ${SITE_NAME}`,
   description:
     "Web platforms, AI engineering, ERP and CRM systems built to run your business.",
 };

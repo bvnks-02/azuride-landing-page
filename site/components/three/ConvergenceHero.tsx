@@ -17,7 +17,7 @@ const ConvergenceCanvas = dynamic(() => import("./ConvergenceCanvas"), {
 const POSTER = (
   <Image
     src="/logo-mark.png"
-    alt={`${SITE_NAME} mark at rest — a gradient ring holding four white petals around a glowing emerald core`}
+    alt={`${SITE_NAME} mark at rest: a gradient ring holding four white petals around a glowing emerald core`}
     width={320}
     height={320}
     priority
@@ -54,13 +54,12 @@ export function ConvergenceHero() {
   }
 
   const teaser = hovered ? BRANCHES.find((b) => b.branch === hovered) : null;
-  const enableBloom = (navigator.hardwareConcurrency ?? 4) >= 6;
 
   return (
     <div className="relative h-full w-full" data-convergence-canvas>
       <ScrollDriver targetId="hero" />
       <div className="absolute inset-0" aria-hidden>
-        <ConvergenceCanvas onDegrade={handleDegrade} enableBloom={enableBloom} />
+        <ConvergenceCanvas onDegrade={handleDegrade} />
       </div>
       {teaser && teaserPos && (
         <div

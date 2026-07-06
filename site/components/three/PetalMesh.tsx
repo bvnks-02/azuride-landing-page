@@ -3,12 +3,12 @@
 import { useMemo, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
-import { BRANCH_ACCENT, type Branch } from "@/lib/tokens";
+import { BRANCH_ACCENT, TOKENS, type Branch } from "@/lib/tokens";
 import { BRANCHES } from "@/lib/branches";
 import { createPetalGeometry } from "./materials";
 import { useScrollStore } from "./scrollStore";
 
-const WHITE = new THREE.Color("#F5F8FA");
+const WHITE = new THREE.Color(TOKENS.surfaceAlt);
 
 type PetalMeshProps = {
   branch: Branch;

@@ -3,7 +3,7 @@ import { TechSubpageShell } from "@/components/tech/TechSubpageShell";
 import { SITE_NAME } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: `ERP Systems — ${SITE_NAME}`,
+  title: `ERP Systems | ${SITE_NAME}`,
   description: "Enterprise resource planning platforms.",
 };
 

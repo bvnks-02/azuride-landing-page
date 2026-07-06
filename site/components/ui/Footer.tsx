@@ -11,7 +11,7 @@ export function Footer() {
           <div className="flex items-center gap-3">
             <Image
               src="/logo-mark.png"
-              alt={`${SITE_NAME} logo mark — four white petals around an emerald core`}
+              alt={`${SITE_NAME} logo mark: four white petals around an emerald core`}
               width={32}
               height={32}
             />

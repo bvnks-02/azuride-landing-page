@@ -23,7 +23,7 @@ export function NavBar() {
         <Link href="/" className="flex items-center gap-3" onClick={() => setOpen(false)}>
           <Image
             src="/logo-mark.png"
-            alt={`${SITE_NAME} logo mark — four white petals around an emerald core`}
+            alt={`${SITE_NAME} logo mark: four white petals around an emerald core`}
             width={40}
             height={40}
             priority

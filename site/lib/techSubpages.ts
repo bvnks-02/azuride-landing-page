@@ -1,6 +1,6 @@
 /**
  * Tech & Innovation sub-pages (design.md §7 grouping). Copy drafted from
- * design.md — reconcile with azurid-company-profile.md before deploy.
+ * design.md; reconcile with azurid-company-profile.md before deploy.
  */
 export type TechSubpage = {
   slug: string;
@@ -16,7 +16,7 @@ export const TECH_SUBPAGES: readonly TechSubpage[] = [
     title: "Web Development",
     teaser: "Landing pages, corporate websites, and e-commerce platforms.",
     intro:
-      "Fast, accessible sites that carry your brand — from a single landing page to a full e-commerce platform.",
+      "Fast, accessible sites that carry your brand, from a single landing page to a full e-commerce platform.",
     services: ["Landing pages", "Corporate websites", "E-commerce platforms"],
   },
   {
@@ -32,7 +32,7 @@ export const TECH_SUBPAGES: readonly TechSubpage[] = [
     title: "ERP Systems",
     teaser: "Enterprise resource planning platforms.",
     intro:
-      "One platform for your operations — mapped to how your business actually runs, then built and integrated to last.",
+      "One platform for your operations, mapped to how your business actually runs, then built and integrated to last.",
     services: ["Process mapping", "Custom ERP builds", "Integration & migration"],
   },
   {

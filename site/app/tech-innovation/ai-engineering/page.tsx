@@ -3,7 +3,7 @@ import { TechSubpageShell } from "@/components/tech/TechSubpageShell";
 import { SITE_NAME } from "@/lib/site";
 
 export const metadata: Metadata = {
-  title: `AI Engineering — ${SITE_NAME}`,
+  title: `AI Engineering | ${SITE_NAME}`,
   description: "Chatbots, virtual assistants, and AI-powered dashboards.",
 };
 

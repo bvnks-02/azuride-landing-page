@@ -9,6 +9,7 @@ export const TOKENS = {
   navy: "#004869",
   ink: "#0A1E2B",
   slate: "#5B6B75",
+  surfaceAlt: "#F5F8FA",
 } as const;
 
 export type Branch = "construction" | "communication" | "tech" | "healthcare";

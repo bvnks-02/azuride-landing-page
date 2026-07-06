@@ -4,7 +4,7 @@ import { useRef } from "react";
 import Link from "next/link";
 import { motion, useScroll, useTransform, type MotionValue } from "motion/react";
 import { BRANCHES } from "@/lib/branches";
-import { BRANCH_ACCENT } from "@/lib/tokens";
+import { BRANCH_ACCENT, TOKENS } from "@/lib/tokens";
 
 /**
  * CSS/SVG tier of the Convergence Reveal (build spec §4.4): the same
@@ -32,7 +32,7 @@ function Petal({
   const fill = useTransform(
     progress,
     [0.25, 0.7],
-    ["#F5F8FA", BRANCH_ACCENT[branch.branch]],
+    [TOKENS.surfaceAlt, BRANCH_ACCENT[branch.branch]],
   );
 
   return (
